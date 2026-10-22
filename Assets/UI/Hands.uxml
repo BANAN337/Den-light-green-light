@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Hands" style="flex-grow: 1; flex-direction: row-reverse; position: relative; bottom: auto; width: 100%;">
+        <ui:VisualElement style="flex-grow: 1; justify-content: center; flex-direction: row-reverse; align-items: auto; align-self: auto; align-content: auto;">
+            <ui:Image name="RightHand" source="project://database/Assets/Graphics/i-Photoroom%20(2).png?fileID=2800000&amp;guid=d93c42fea8549994eb2e04bf5bb1820f&amp;type=3#i-Photoroom (2)" style="height: 40%; width: auto; align-items: stretch; align-self: auto; justify-content: flex-start;"/>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; align-content: auto; align-items: auto; flex-direction: row-reverse; justify-content: center;">
+            <ui:Image source="project://database/Assets/Graphics/i-Photoroom%20(1).png?fileID=2800000&amp;guid=7863792f85f87f34f987e688f202bd74&amp;type=3#i-Photoroom (1)" name="LeftHand" style="height: 40%;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

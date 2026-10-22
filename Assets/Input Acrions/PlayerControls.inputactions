@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "PlayerControls",
+    "maps": [
+        {
+            "name": "Walk",
+            "id": "0e68522a-2fb3-43fe-a89f-ae75d4fb249b",
+            "actions": [
+                {
+                    "name": "Walk Forward",
+                    "type": "Button",
+                    "id": "dcb37833-45ee-4244-9c80-8eeced390646",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "95559d13-9161-4265-9d59-04808489d90f",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
