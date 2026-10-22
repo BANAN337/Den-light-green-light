@@ -5,5 +5,5 @@ using UnityEngine;
 public class AudioClipData
 {
     public ClipIndex index;
-    public string clipName;
+    public AudioClip audioClip;
 }

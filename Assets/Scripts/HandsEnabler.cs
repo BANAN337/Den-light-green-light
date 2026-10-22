@@ -25,7 +25,7 @@ public class HandsEnabler : MonoBehaviour
         };
         _hands.style.transitionDuration = new List<TimeValue>
         {
-            //new(duration, TimeUnit.Second),
+            new(duration, TimeUnit.Second),
         };
         
     }

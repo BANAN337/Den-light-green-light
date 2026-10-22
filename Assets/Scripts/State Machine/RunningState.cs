@@ -29,7 +29,6 @@ namespace State_Machine
         public RunningState(Animator animator, AudioSource source, float duration, Transform selfTransform, Vector2 targetScale,
             Transform endTransform) : base(animator,source)
         {
-            
             _totalDuration = duration / _speed;
             
             _duration = duration / _speed / _numberOfSteps;
@@ -44,6 +43,8 @@ namespace State_Machine
 
             _startingPosition = _self.position;
             _endingPosition = Vector2.Lerp(_self.position, endTransform.position, _currentStep / _numberOfSteps);
+
+            _clip = AudioManager.Instance.GetClip(ClipIndex.TargetSteps);
         }
 
         public override void Enter()
@@ -71,8 +72,10 @@ namespace State_Machine
             {
                 TargetAudioSource.Stop();
                 TargetAudioSource.PlayOneShot(_clip);
+                
                 _currentStep++;
                 _upAndDown.Stop();
+                
                 if (_currentStep >= _numberOfSteps)
                 {
                     return;

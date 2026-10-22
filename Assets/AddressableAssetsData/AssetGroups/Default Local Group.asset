@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 49e9d71cbd843f74881f0c5ea1aad164
   m_SerializeEntries:
+  - m_GUID: 5a1a2b494dd0dfa4baa916386aa03938
+    m_Address: MainAudio
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6b06ca2af5ca4674aa0ac644cdf68533
     m_Address: distorted_scream
     m_ReadOnly: 0
