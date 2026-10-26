@@ -7,7 +7,6 @@ public class AttackModeState : TargetState
 {
     public bool IsPressed { get; private set; }
     
-    private int _switchDelay = 10;
     private Controller _controller;
 
     public AttackModeState(Animator animator, AudioSource source, Controller controller) : base(animator, source)

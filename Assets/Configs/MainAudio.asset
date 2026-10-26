@@ -13,5 +13,25 @@ MonoBehaviour:
   m_Name: MainAudio
   m_EditorClassIdentifier: Assembly-CSharp::AudioDatabase
   audioClips:
+  - index: 4
+    audioClip: {fileID: 8300000, guid: b8ddad66f7f5320428639fdc62dba9da, type: 3}
+  - index: 5
+    audioClip: {fileID: 8300000, guid: def755cc26ce2054a8518fbe6fe49e3b, type: 3}
+  - index: 6
+    audioClip: {fileID: 8300000, guid: 200880d2811f72641a0efcc956062c51, type: 3}
+  - index: 7
+    audioClip: {fileID: 8300000, guid: ba41bfcaf1d885b468d268f0f11957b6, type: 3}
+  - index: 8
+    audioClip: {fileID: 8300000, guid: 7cd660edbc98f6c4bb5d3da4c1ca32af, type: 3}
   - index: 0
-    audioClip: {fileID: 8300000, guid: 6b06ca2af5ca4674aa0ac644cdf68533, type: 3}
+    audioClip: {fileID: 8300000, guid: 8f999fa98f88ad0429b920ff858c11be, type: 3}
+  - index: 1
+    audioClip: {fileID: 8300000, guid: 1cf967720855a7541a01dc9858b891b9, type: 3}
+  - index: 2
+    audioClip: {fileID: 8300000, guid: 362d513d6070584438ee50a7a5a8f3b7, type: 3}
+  - index: 3
+    audioClip: {fileID: 8300000, guid: 0ce8d03a1c755d148a3fb4386f166094, type: 3}
+  - index: 9
+    audioClip: {fileID: 8300000, guid: 9b1817141c54c7d4f8cc93ec1b095100, type: 3}
+  - index: 10
+    audioClip: {fileID: 8300000, guid: c50e7c30be6e4164c9e6edcc7f043a2a, type: 3}

@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -8,12 +9,11 @@ namespace State_Machine
         private Transform _self;
         private Transform _end;
         
-        private AudioClip _clip;
+        private ClipIndex[] _indexes = { ClipIndex.TargetSteps1 , ClipIndex.TargetSteps2 , ClipIndex.TargetSteps3 , ClipIndex.TargetSteps4};
 
         private SmoothMotion _upAndDown;
         private SmoothMotion _scaling;
         
-        private float _totalDuration;
         private float _speed = 50;
 
         private Vector2 _startingScale;
@@ -25,11 +25,13 @@ namespace State_Machine
         private float _duration;
         private float _currentStep = 1;
         private float _numberOfSteps = 20;
+        
+        public float TotalDuration { get; private set; }
 
         public RunningState(Animator animator, AudioSource source, float duration, Transform selfTransform, Vector2 targetScale,
             Transform endTransform) : base(animator,source)
         {
-            _totalDuration = duration / _speed;
+            TotalDuration = duration / _speed;
             
             _duration = duration / _speed / _numberOfSteps;
             _self = selfTransform;
@@ -43,17 +45,18 @@ namespace State_Machine
 
             _startingPosition = _self.position;
             _endingPosition = Vector2.Lerp(_self.position, endTransform.position, _currentStep / _numberOfSteps);
-
-            _clip = AudioManager.Instance.GetClip(ClipIndex.TargetSteps);
         }
 
         public override void Enter()
         {
             PlayAnimation("Running");
+            TargetAudioSource.pitch = 3f;
+            //TargetAudioSource.PlayOneShot(AudioManager.Instance.GetClip(ClipIndex.MenacingRunning));
         }
 
         public override void Exit()
         {
+            
         }
 
         public override void Update()
@@ -62,7 +65,7 @@ namespace State_Machine
             {
                 return;
             }
-            _self.localScale = _scaling.StoppableInterpolateVector(_startingScale, _endingScale, _totalDuration);
+            _self.localScale = _scaling.StoppableInterpolateVector(_startingScale, _endingScale, TotalDuration);
 
             _self.position =
                 _upAndDown.ParabolicInterpolateVector(_startingPosition, _endingPosition, _height, _duration);
@@ -70,8 +73,7 @@ namespace State_Machine
 
             if (_upAndDown.RemainingDuration <= 0)
             {
-                TargetAudioSource.Stop();
-                TargetAudioSource.PlayOneShot(_clip);
+                AudioPlayer.PlayRandomClip(TargetAudioSource, _indexes);
                 
                 _currentStep++;
                 _upAndDown.Stop();

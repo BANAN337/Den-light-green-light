@@ -12,6 +12,17 @@ public class SmoothMotion
     {
         _elapsedTime = 0f;
     }
+
+    public float InterpolateFloat(float startValue, float endValue, float duration)
+    {
+        if (_elapsedTime < duration)
+        {
+            var t = CoefficientT(duration);
+            
+            return Mathf.Lerp(startValue, endValue, t);
+        }
+        return endValue;
+    }
     
     public Vector2 StoppableInterpolateVector(Vector2 startVector, Vector2 endVector, float duration)
     {
