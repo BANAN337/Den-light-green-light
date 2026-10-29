@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:Label text="YOU WON!!!!&#10;CLAIM YOUR PRIZE!!!!" name="Message" style="font-size: 124px; -unity-font-definition: url(&quot;project://database/Assets/Graphics/Comic%20Sans%20MS.ttf?fileID=12800000&amp;guid=b12ae384e494bbe45b1b5bc0444f3c32&amp;type=3#Comic Sans MS&quot;); -unity-font-style: bold; -unity-text-align: upper-center; -unity-paragraph-spacing: -41px;"/>
+        <ui:Image name="Code" source="" enabled="true"/>
+    </ui:VisualElement>
+</ui:UXML>

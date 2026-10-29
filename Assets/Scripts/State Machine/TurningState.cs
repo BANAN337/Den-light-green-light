@@ -5,8 +5,6 @@ namespace State_Machine
 {
     public class TurningState : TargetState
     {
-        private int _turningDelay = 5;
-
         public TurningState(Animator animator,AudioSource source) : base(animator,source)
         {
             

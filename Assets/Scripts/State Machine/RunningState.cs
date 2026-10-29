@@ -51,7 +51,6 @@ namespace State_Machine
         {
             PlayAnimation("Running");
             TargetAudioSource.pitch = 3f;
-            //TargetAudioSource.PlayOneShot(AudioManager.Instance.GetClip(ClipIndex.MenacingRunning));
         }
 
         public override void Exit()

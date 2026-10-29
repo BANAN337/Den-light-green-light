@@ -6,6 +6,9 @@ public class StartingUI : MonoBehaviour
 {
     [SerializeField] private string startButtonText;
     [SerializeField] private string quitButtonText;
+    [SerializeField] private AudioClip music;
+    
+    private AudioSource _audioSource;
     
     private string _originalStartButtonText;
     private string _originalQuitButtonText;
@@ -35,6 +38,10 @@ public class StartingUI : MonoBehaviour
         _quitButton.RegisterCallback<PointerLeaveEvent>(_ => {ChangeText(_quitButton, _originalQuitButtonText);});
 
         _startButton.clicked += ChangeSceneToMain;
+
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.loop = true;
+        _audioSource.PlayOneShot(music);
     }
 
     private void ChangeSceneToMain()

@@ -1,5 +1,6 @@
 
 using System.Collections;
+using DefaultNamespace;
 using UnityEngine;
 using IState = State_Machine.IState;
 
@@ -17,6 +18,7 @@ public class AttackModeState : TargetState
     public override void Enter()
     {
         PlayAnimation("Attack");
+        AudioPlayer.PlayClip(TargetAudioSource, ClipIndex.VineBoom);
     }
 
     public override void Exit()

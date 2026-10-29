@@ -15,7 +15,8 @@ public enum ClipIndex
     NormalFootsteps4,
     NormalFootsteps5,
     MenacingRunning,
-    Jumpscare
+    Jumpscare,
+    VineBoom
 }
 
 public class AudioManager : MonoBehaviour

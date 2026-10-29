@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -24,7 +25,7 @@ public class SmoothMotion
         return endValue;
     }
     
-    public Vector2 StoppableInterpolateVector(Vector2 startVector, Vector2 endVector, float duration)
+    public Vector2 StoppableInterpolateVector(Vector2 startVector, Vector2 endVector, float duration, Action onComplete = null)
     {
         if (_elapsedTime < duration)
         {
@@ -33,6 +34,7 @@ public class SmoothMotion
             return Vector2.Lerp(startVector, endVector, t);
         }
 
+        onComplete?.Invoke();
         return endVector;
     }
 

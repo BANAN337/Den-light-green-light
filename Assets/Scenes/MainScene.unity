@@ -405,7 +405,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.9253036, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -426,11 +426,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb2b374838b60d4795607836fcfedcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetObject
-  objectToMove: {fileID: 559454046}
   duration: 100
+  objectToMove: {fileID: 559454046}
   targetScale: {x: 7.3, y: 7.3}
   controller: {fileID: 820689551}
   clipIndexes: 
+  minAnticipationTime: 2.5
+  maxAnticipationTime: 7
+  minTurningTime: 0.9
+  maxTurningTime: 1
+  minAttackModeTime: 1
+  maxAttackModeTime: 4
 --- !u!95 &524624758
 Animator:
   serializedVersion: 7
@@ -694,7 +700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52b7f430536e404f87548929845a587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Controller
-  updateInterval: 100
+  updateInterval: 0.5
   OnWalkForward:
     m_PersistentCalls:
       m_Calls: []

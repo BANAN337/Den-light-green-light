@@ -7,9 +7,9 @@ using UnityEngine.Serialization;
 public class Controller : MonoBehaviour
 {
     private PlayerControls _playerControls;
-    private int _callFrame;
+    private float _callFrame;
 
-    [SerializeField] private int updateInterval = 5;
+    [SerializeField] private float updateInterval = 0.5f;
 
     public UnityEvent OnWalkForward;
     public UnityEvent OnWalkStopped;
@@ -59,10 +59,22 @@ public class Controller : MonoBehaviour
 
     private void OnWalkHoldedWithIntervalsCaller()
     {
-        if (!_playerControls.Walk.WalkForward.IsPressed() || Time.frameCount < _callFrame) return;
-        
+        if (!_playerControls.Walk.WalkForward.IsPressed())
+        {
+            _callFrame = 0f;
+            return;
+        }
+
+        _callFrame += Time.deltaTime;
+
+        if (_callFrame < updateInterval)
+        {
+            return;
+        }
+        Debug.Log(_callFrame);
+    
         OnWalkHoldedWithIntervals.Invoke();
-        _callFrame = Time.frameCount + updateInterval;
+        _callFrame = 0f;
     }
 
     private void OnWalkStoppedCaller(InputAction.CallbackContext context)

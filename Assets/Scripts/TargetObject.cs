@@ -1,31 +1,30 @@
+using System;
 using System.Collections;
 using State_Machine;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class TargetObject : MonoBehaviour
 {
     [SerializeField] private float duration = 100;
     private float _startingDuration;
     private float _firstDivider = 0.25f;
+    private event Action OnThresholdReached;
 
     private float Duration
     {
         get => duration;
         set
         {
-            if (value <= _startingDuration / 3)
+            if (value <=0)
             {
-                minAnticipationTime = minAnticipationTime * _firstDivider;
-                minTurningTime = minTurningTime * _firstDivider;
-                minAttackModeTime = minAttackModeTime * _firstDivider;
+                controller.DisableControls();
+                _animator.Play("Ending");
+                SceneSwitcher.LoadScene(SceneIndex.End);
             }
-            else if (value <= _startingDuration /4)
-            {
-                maxAnticipationTime = maxAnticipationTime * _firstDivider;
-                maxTurningTime = maxTurningTime * _firstDivider;
-                maxAttackModeTime = maxAttackModeTime * _firstDivider;
-            }
+            OnThresholdReached?.Invoke();
+            
             duration = value;
         }
     }
@@ -36,10 +35,10 @@ public class TargetObject : MonoBehaviour
     [SerializeField] private ClipIndex[] clipIndexes;
     
     [Space]
-    [SerializeField] private float minAnticipationTime = 3.5f;
+    [SerializeField] private float minAnticipationTime = 2.5f;
     [SerializeField] private float maxAnticipationTime = 7f;
     [SerializeField] private float minTurningTime = 0.9f;
-    [SerializeField] private float maxTurningTime = 1.2f;
+    [SerializeField] private float maxTurningTime = 1f;
     [SerializeField] private float minAttackModeTime = 1f;
     [SerializeField] private float maxAttackModeTime = 4f;
 
@@ -63,6 +62,9 @@ public class TargetObject : MonoBehaviour
 
         _stateSwitcher = new StateSwitcher(new AnticipationState(_animator,_audioSource));
 
+        OnThresholdReached += OnFirstThresholdReached;
+        OnThresholdReached += OnSecondThresholdReached;
+        
         _animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
     }
@@ -76,6 +78,28 @@ public class TargetObject : MonoBehaviour
     {
         StartCoroutine(SwitchToAnticipationState());
     }
+
+    private void OnFirstThresholdReached()
+    {
+        if (Duration <= _startingDuration * 3 / 4)
+        {
+            maxAnticipationTime *= _firstDivider;
+            maxTurningTime = 0.6f;
+            maxAttackModeTime *= _firstDivider;
+            OnThresholdReached -= OnFirstThresholdReached;
+        }
+    }
+    private void OnSecondThresholdReached()
+    {
+        if (Duration <= _startingDuration / 3)
+        {
+            minAnticipationTime *= _firstDivider;
+            minTurningTime *= 0.2f;
+            minAttackModeTime *= _firstDivider;
+            OnThresholdReached -= OnSecondThresholdReached;
+        }
+    }
+    
 
     private IEnumerator SwitchToAnticipationState()
     {
@@ -103,6 +127,7 @@ public class TargetObject : MonoBehaviour
         if (attackModeState.IsPressed)
         {
             controller.DisableControls();
+            StopAllCoroutines();
             StartCoroutine(SwitchToRunningState(Duration));
         }
         else
@@ -129,7 +154,7 @@ public class TargetObject : MonoBehaviour
 
     public void ContinueMoving()
     {
-        transform.position = _smoothPosition.StoppableInterpolateVector(_startPosition, objectToMove.position, Duration);
+        transform.position = _smoothPosition.StoppableInterpolateVector(_startPosition, objectToMove.position, Duration, Stop);
         transform.localScale = _smoothScaling.StoppableInterpolateVector(_startScale, targetScale, Duration);
     }
 
@@ -137,9 +162,11 @@ public class TargetObject : MonoBehaviour
     {
         _startPosition = transform.position;
         _startScale = transform.localScale;
-        Duration = _smoothPosition.RemainingDuration;
+        Duration = Mathf.Clamp(_smoothPosition.RemainingDuration, 0, _startingDuration);
 
         _smoothPosition.Stop();
         _smoothScaling.Stop();
     }
+
+    
 }
